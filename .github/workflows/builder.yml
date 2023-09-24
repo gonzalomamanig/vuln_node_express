@@ -1,7 +1,7 @@
 name: Build and Scan
 on:
-  pushes:
-  pull_request:
+  pushes: [develop]
+  pull_request: [develop]
 jobs:
   build:
     run-on: ubuntu-20.04
