@@ -1,9 +1,9 @@
 name: Build and Scan
 on:
-  pushes:
-    branches: ["develop"]
+  push:
+    branches: [ "develop" ]
   pull_request:
-    branches: ["develop"]
+    branches: [ "develop" ]
 jobs:
   build:
     run-on: ubuntu-20.04
