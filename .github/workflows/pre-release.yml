@@ -2,7 +2,7 @@ name: Continuous Integration - CI
 on:
   push:
     branches:
-      - develop
+      - master
 jobs:
   install:
     name: install and test
