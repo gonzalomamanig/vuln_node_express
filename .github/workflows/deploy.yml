@@ -1,8 +1,8 @@
-name: Continuous Integration - CI
+name: CI/CD
 on:
   push:
     branches:
-      - develop
+      - 'release-**'
 jobs:
   install:
     name: install and test
