@@ -1,0 +1,47 @@
+name: Continuous Integration - CI
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  install:
+    name: instalando dependencias y tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Node.js 14.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          cache: npm
+      - name: Install dependencies
+        run: npm install
+      - name: Run unit tests
+        run: npm test
+  codeql
+    name: Analizando - CodeQl
+    needs: install
+    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+    timeout-minutes: ${{ (matrix.language == 'swift' && 120) || 360 }}
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'javascript' ]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: ${{ matrix.language }}
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v2
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+        with:
+          category: "/language:${{matrix.language}}"
