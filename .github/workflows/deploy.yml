@@ -61,7 +61,7 @@ jobs:
           # and add it to your GitHub secrets.
           SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
   njsscan:
-    name: NodeJs Scan
+    name: njsscan code scanning
     needs: install
     runs-on: ubuntu-latest
     steps:
@@ -73,7 +73,7 @@ jobs:
         with:
           args: '. --sarif --output results.sarif || true'
       - name: Upload njsscan report
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: results.sarif
   build:
