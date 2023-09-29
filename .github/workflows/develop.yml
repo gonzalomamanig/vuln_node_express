@@ -2,10 +2,10 @@ name: Continuous Integration - CI
 on:
   push:
     branches:
-      - develop
+      - master
 jobs:
   install:
-    name: instalando dependencias y tests
+    name: install and test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -20,7 +20,7 @@ jobs:
       - name: Run unit tests
         run: npm test
   codeql:
-    name: Analizando - CodeQl
+    name: CodeQL
     needs: install
     runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
     timeout-minutes: ${{ (matrix.language == 'swift' && 120) || 360 }}
