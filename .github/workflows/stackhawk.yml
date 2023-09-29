@@ -27,8 +27,10 @@ jobs:
         run: npm run start &
       - name: Run HawkScan
         env:
-          HAWK_ENV: GitHub Actions
-        continue-on-error: true
-        uses: stackhawk/hawkscan-action@v2
+          APP_HOST: 'http://localhost:3000'
+          APP_ID: 8029040f-5f80-48c2-aa53-2adf943dc850
+          APP_ENV: Pre-Production
+        continue-on-error: false
+        uses: stackhawk/hawkscan-action@v2.1.2
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
