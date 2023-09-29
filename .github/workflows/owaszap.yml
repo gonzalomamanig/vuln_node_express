@@ -3,7 +3,7 @@ name: ZAP Action
 on:
   push:
     branches:
-      - develop
+      - master
 jobs:
   build-and-test:
     name: Build and Scan

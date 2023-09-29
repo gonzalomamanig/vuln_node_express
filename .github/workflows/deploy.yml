@@ -72,8 +72,9 @@ jobs:
         with:
           node-version: 14
           cache: npm
-  zapaction:
+  owaszap:
     name: Owas Zap
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -125,3 +126,15 @@ jobs:
         uses: stackhawk/hawkscan-action@v2.1.2
         with:
           apiKey: ${{ secrets.HAWK_API_KEY }}
+  deploy:
+    name: Deploy application
+    needs: [owaszap, stackhawk]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Node.js 14.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+          cache: npm
