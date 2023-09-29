@@ -10,7 +10,7 @@ on:
   push:
     branches:
       - develop
-  
+
     # It is recommended to change the schedule to a random time.
 
 jobs:
