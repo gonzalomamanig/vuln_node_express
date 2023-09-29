@@ -19,7 +19,7 @@ jobs:
         run: npm install
       - name: Run unit tests
         run: npm test
-  codeql
+  codeql:
     name: Analizando - CodeQl
     needs: install
     runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
